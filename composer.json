@@ -11,5 +11,17 @@
     "minimum-stability": "dev",
     "require": {
         "anahkiasen/former": "^4.1@dev"
+    },
+    "autoload": {
+        "psr-4": {
+          "Wcr\\Crud\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wcr\\Crud\\CrudServicesProvider"
+            ]
+        }
     }
 }
