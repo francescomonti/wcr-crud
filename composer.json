@@ -1,0 +1,15 @@
+{
+    "name": "wcr/crud",
+    "description": "a package for crud",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Francesco Monti",
+            "email": "f.monti@webcrafters.it"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "anahkiasen/former": "^4.1@dev"
+    }
+}
