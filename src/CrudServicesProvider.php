@@ -26,4 +26,18 @@ class CrudServicesProvider extends ServiceProvider
     {
         //
     }
+
+    protected $listen = [
+        'App\Events\Event' => [
+            'App\Listeners\EventListener',
+        ],
+        'crud.created' => [
+        ],
+
+        'crud.updated' => [
+        ],
+
+        'crud.deleted' => [
+        ]
+    ];
 }

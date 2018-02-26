@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Event;
 
 class CrudController extends Controller
 {
@@ -48,7 +49,8 @@ class CrudController extends Controller
             $resource->title = Input::get('title');
             $resource->body = Input::get('body');
             $resource->save();
-            Session::flash('message', 'Successfully created nerd!');
+            Event::fire('crud.created', $resource);
+            Session::flash('message', 'Successfully created entity!');
             return Redirect::action($this->opt['controller'].'@index');
         }
     }
@@ -77,7 +79,8 @@ class CrudController extends Controller
             $resource->title = Input::get('title');
             $resource->body = Input::get('body');
             $resource->save();
-            Session::flash('message', 'Successfully created nerd!');
+            Event::fire('crud.created', $resource);
+            Session::flash('message', 'Successfully created entity!');
             return Redirect::action($this->opt['controller'].'@index');
         }
     }
@@ -85,7 +88,8 @@ class CrudController extends Controller
     public function destroy ($id){
         $resource = $this->getResource($id);
         $resource->delete();
-        Session::flash('message', 'Successfully deleted nerd!');
+        Event::fire('crud.created', $resource);
+        Session::flash('message', 'Successfully deleted entity!');
         return Redirect::action($this->opt['controller'].'@index');
     }
 
