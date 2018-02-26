@@ -79,7 +79,7 @@ class CrudController extends Controller
             $resource->title = Input::get('title');
             $resource->body = Input::get('body');
             $resource->save();
-            Event::fire('crud.created', $resource);
+            Event::fire('crud.updated', $resource);
             Session::flash('message', 'Successfully created entity!');
             return Redirect::action($this->opt['controller'].'@index');
         }
@@ -87,8 +87,8 @@ class CrudController extends Controller
 
     public function destroy ($id){
         $resource = $this->getResource($id);
+        Event::fire('crud.deleted', $resource);
         $resource->delete();
-        Event::fire('crud.created', $resource);
         Session::flash('message', 'Successfully deleted entity!');
         return Redirect::action($this->opt['controller'].'@index');
     }
