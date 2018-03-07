@@ -20,7 +20,8 @@ class CrudController extends Controller
         'tableFields' => array('id')
     );
 
-    function setController(){
+    function __construct(){
+        $this->model = new $this->model;
         $controllerName = explode('\\', get_class($this));
         $this->opt['controller'] = end($controllerName);
         $this->opt['index'] = action($this->opt['controller'].'@index');
