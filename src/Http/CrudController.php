@@ -46,8 +46,9 @@ class CrudController extends Controller
                 ->withInput(Input::except('password'));
         }else{
             $resource = $this->model;
-            $resource->title = Input::get('title');
-            $resource->body = Input::get('body');
+            foreach( $this->acceptedAttributes as $a ){
+                $resource->$a = Input::get($a);
+            }
             $resource->save();
             Event::fire('crud.created', $resource);
             Session::flash('message', 'Successfully created entity!');
@@ -76,8 +77,9 @@ class CrudController extends Controller
                 ->withInput(Input::except('password'));
         }else{
             $resource = $this->getResource($id);
-            $resource->title = Input::get('title');
-            $resource->body = Input::get('body');
+            foreach( $this->acceptedAttributes as $a ){
+                $resource->$a = Input::get($a);
+            }
             $resource->save();
             Event::fire('crud.updated', $resource);
             Session::flash('message', 'Successfully created entity!');
