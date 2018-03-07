@@ -17,19 +17,12 @@ use Wcr\Crud\Http\CrudController;
 
 class PostController extends CrudController
 {
-    public $opt = array(
-        'item' => 'Post',
-        'items' => 'Posts',
-        'tableFields' => array('id', 'title')
-    );
-
-    public $acceptedAttributes = array( 'title', 'body' );
-
-    public $validateRules = array(
-        'title' => 'required',
-        'body' => 'required'
-    );
     
-    public $model = 'App\Post';
+    public $model = 'App\Post'; // REQUIRED to define the model class
+
+    public $acceptedAttributes = array( 'title', 'body' ); // REQUIRED to define accepted attributes by form
+
+    public $validateRules = array( 'title' => 'required', 'body' => 'required' ); // OPTIONAL to define form validation
+    
 }
 ```
