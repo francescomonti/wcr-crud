@@ -13,7 +13,9 @@ class CrudServicesProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $this->publishes([__DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'], 'migrations');
+        
         $this->loadViewsFrom(__DIR__.'/resources/views', 'WcrCrud');
     }
 

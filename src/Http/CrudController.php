@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Event;
 
@@ -21,7 +22,7 @@ class CrudController extends Controller
     );
 
     function __construct(){
-        $this->model = new $this->model;
+        $this->model = new $this->modelClass;
         $controllerName = explode('\\', get_class($this));
         $this->opt['controller'] = end($controllerName);
         $this->opt['index'] = action($this->opt['controller'].'@index');
@@ -97,7 +98,8 @@ class CrudController extends Controller
     }
 
     private function getResources (){
-        return $this->model->all();
+        //return $this->model->all(); // all obj for admin
+        return Auth::user()->listOf($this->modelClass); // also owned resources
     }
 
     private function getResource ($id){
