@@ -1,5 +1,9 @@
 # wcr-crud
-Laravel crud package
+Laravel crud package. The views are optimized for <https://github.com/jeroennoten/Laravel-AdminLTE>
+
+### Required
+Laravel 5.5<https://laravel.com/docs/5.5>
+Former<https://github.com/formers/former> 
 
 ### Install
 Download package and setting
