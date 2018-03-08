@@ -13,11 +13,12 @@ class CreateEntitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('entities', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('resource_type')->nullable();
-            $table->integer('resource_id')->nullable();
             $table->integer('user_id')->nullable();
+            $table->integer('resource_id')->nullable();
+            $table->string('resource_type')->nullable();
+            $table->string('relationship')->nullable();
             $table->timestamps();
         });
     }

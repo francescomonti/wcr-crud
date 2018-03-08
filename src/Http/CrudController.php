@@ -15,18 +15,28 @@ class CrudController extends Controller
     public $createView = 'WcrCrud::create';
     public $editView = 'WcrCrud::edit';
     public $showView = 'WcrCrud::show';
-    public $opt = array(
+    public $_listItem = 'WcrCrud::partials/_listItem';
+    public $_showItem = 'WcrCrud::partials/_showItem';
+    public $def = array(
         'item' => 'Item',
         'items' => 'Items',
         'tableFields' => array('id')
     );
+    public $opt = array();
 
     function __construct(){
         $this->model = new $this->modelClass;
         $controllerName = explode('\\', get_class($this));
-        $this->opt['controller'] = end($controllerName);
-        $this->opt['index'] = action($this->opt['controller'].'@index');
-        $this->opt['create'] = action($this->opt['controller'].'@create');
+
+        $this->def['controller'] = end($controllerName);
+        $this->def['index'] = action($this->def['controller'].'@index');
+        $this->def['create'] = action($this->def['controller'].'@create');
+        $this->def['partials'] = array(
+            'listItem' => $this->_listItem,
+            'showItem' => $this->_showItem,
+            'itemFields' => str_replace('Controller', '', $this->def['controller']).'/fields',
+        );
+        $this->opt = array_merge($this->def, $this->opt);
     }
 
     public function index (){

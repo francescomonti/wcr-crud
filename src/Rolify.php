@@ -21,4 +21,26 @@ trait Rolify
         return $res;
     }
 
+    public function roles (){
+        return $this->belongsToMany('Wcr\Crud\Role', 'users_roles');
+    }
+
+    public function permissions (){
+        return $this->morphMany('Wcr\Crud\Permission', 'target');
+    }
+
+    public function has_ability ($ability){
+        $a = $this->permissions()->where('ability', '=', $ability)->count();
+        if ( $a > 0 ) return true;
+        else {
+            foreach($this->roles()->get() as $role){
+                $b = $role->permissions()->where('ability', '=', $ability)->count();
+                if ( $b > 0 ) return true;
+                break;
+            }
+
+            return false;
+        }
+    }
+
 }

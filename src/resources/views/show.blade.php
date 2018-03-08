@@ -9,7 +9,7 @@
             </div>
 
             <div class="ibox-content">
-               <pre><?= print_r($resource, true) ?></pre>
+               @include($opt['partials']['showItem'])
             </div>
         </div>
     </div>
