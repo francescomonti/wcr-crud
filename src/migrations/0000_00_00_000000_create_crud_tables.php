@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration
+class CreateCrudTables extends Migration
 {
     /**
      * Run the migrations.
@@ -33,6 +33,15 @@ class CreateRolesTable extends Migration
             $table->integer('target_id')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('entities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->nullable();
+            $table->integer('resource_id')->nullable();
+            $table->string('resource_type')->nullable();
+            $table->string('relationship')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -45,5 +54,6 @@ class CreateRolesTable extends Migration
         Schema::dropIfExists('roles');
         Schema::dropIfExists('users_roles');
         Schema::dropIfExists('permissions');
+        Schema::dropIfExists('entities');
     }
 }
